@@ -21,4 +21,5 @@ jobs:
       - run: docker context use multiarch_builder
       - run: docker buildx create --use multiarch_builder
       - run: docker buildx inspect --bootstrap
-      - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest https://github.com/iamrony777/alpine-pandas.git#"$CIRCLE_BRANCH"
+      - run: ping 8.8.8.8 -c 10 -w 10
+      # - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest https://github.com/iamrony777/alpine-pandas.git#"$CIRCLE_BRANCH"
