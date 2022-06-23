@@ -20,5 +20,4 @@ jobs:
       - run: docker buildx create --use multiarch_builder
       - run: docker buildx inspect --bootstrap
       - run: git clone https://github.com/iamrony777/alpine-pandas.git && cd alpine-pandas && git checkout circleci-project-setup
-      - run: pwd && ls && ls -a alpine-pandas 
-      # - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest alpine-pandas/Dockerfile
+      - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest "$PWD"/alpine-pandas/Dockerfile
