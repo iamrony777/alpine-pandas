@@ -15,4 +15,4 @@ jobs:
       - run: docker buildx use multiarch_builder
       - run: docker buildx inspect --bootstrap
       - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
-      - run: docker build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest .
+      - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest .
