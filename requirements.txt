@@ -1,0 +1,7 @@
+cython
+numpy
+python-dateutil
+pytz
+numexpr
+bottleneck
+pandas

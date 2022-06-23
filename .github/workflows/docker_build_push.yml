@@ -1,9 +1,6 @@
 name: Build and Push 
 
-on:
-  push:
-    branches:
-      - 'main'
+on: push
 
 jobs:
   qemu:
@@ -29,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
+          platforms: linux/amd64, linux/arm/v6, linux/arm/v7, linux/arm64
           push: true
           tags: iamrony777/alpine-pandas:latest
