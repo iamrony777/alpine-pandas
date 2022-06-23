@@ -7,10 +7,11 @@ workflows:
 jobs:
   build:
     machine: true
+      - image: ubuntu-2204:2022.04.1
     resource_class: large
 
     steps:
-      - run: sudo apt-get update -y && sudo apt-get upgrade -y
+      - run: sudo apt-get update -y
       - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
       - run: docker context create multiarch_builder
       - run: docker context use multiarch_builder
