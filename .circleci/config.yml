@@ -6,19 +6,12 @@ workflows:
 
 jobs:
   build:
-    docker: 
-      - image: jdrouet/docker-with-buildx:stable
+    machine: true
     resource_class: large
     steps:
-
-      - setup_remote_docker:
-          version: 20.10.14
-          docker_layer_caching: true
-
-      - run: |-
-          docker context create multiarch_builder
-          docker buildx create multiarch_builder
-          docker buildx use multiarch_builder
-          docker buildx inspect --bootstrap
-          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-          docker build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest .
+      - run: docker context create multiarch_builder
+      - run: docker buildx create multiarch_builder
+      - run: docker buildx use multiarch_builder
+      - run: docker buildx inspect --bootstrap
+      - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
+      - run: docker build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest .
