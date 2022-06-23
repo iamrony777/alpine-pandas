@@ -11,6 +11,7 @@ jobs:
     steps:
       - run: docker context create multiarch_builder
       - run: docker buildx create multiarch_builder
+      - run: docker context use multiarch_builder
       - run: docker buildx use multiarch_builder
       - run: docker buildx inspect --bootstrap
       - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
