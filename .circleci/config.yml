@@ -8,12 +8,18 @@ jobs:
   build:
     machine: true
     resource_class: large
+
     steps:
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
       - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
       - run: docker context create multiarch_builder
       - run: docker context use multiarch_builder
       - run: docker buildx create --use multiarch_builder
       - run: docker buildx inspect --bootstrap
+      - run: ls .. && ls ../project
       # - run: git clone https://github.com/iamrony777/alpine-pandas.git
       # - run: cd alpine-pandas
       # - run: git checkout circleci-project-setup
