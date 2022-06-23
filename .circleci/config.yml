@@ -7,7 +7,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:current
+      - image: cimg/base:stable
     resource_class: large
 
     steps:
@@ -15,11 +15,9 @@ jobs:
           version: 20.10.14
           docker_layer_caching: true
 
-      # - run: sudo apt-get update -y
       - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
       - run: docker context create multiarch_builder
       - run: docker context use multiarch_builder
       - run: docker buildx create --use multiarch_builder
       - run: docker buildx inspect --bootstrap
-      - run: ping 8.8.8.8 -c 10 -w 10
-      # - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest https://github.com/iamrony777/alpine-pandas.git#"$CIRCLE_BRANCH"
+      - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest https://github.com/iamrony777/alpine-pandas.git#"$CIRCLE_BRANCH"
