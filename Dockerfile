@@ -7,7 +7,7 @@ ENV RUN_TIME='musl libgcc libstdc++'
 
 RUN apk add --no-cache --virtual .build $BUILD_TIME
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-RUN pip install --no-cache-dir -U pip setuptools wheel
+# RUN pip install --no-cache-dir -U pip setuptools wheel
 RUN pip install --no-cache-dir -r requirements.txt 
 
 RUN apk del .build && \
