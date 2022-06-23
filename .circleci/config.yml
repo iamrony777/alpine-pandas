@@ -6,12 +6,16 @@ workflows:
 
 jobs:
   build:
-    docker:
+    docker: 
       - image: cimg/base:stable
-  resource_class: xlarge
-  steps:
-    - setup_remote_docker:
-        version: 20.10.14
-    - run: |
-        docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest .
+    resource_class: xlarge
+    steps:
+
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+
+      # build and push Docker image
+      - run: |-
+          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest .
