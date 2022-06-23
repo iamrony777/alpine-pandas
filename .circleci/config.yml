@@ -16,6 +16,7 @@ jobs:
           docker_layer_caching: true
 
       - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
+      - run: docker run --privileged --rm tonistiigi/binfmt --install all
       - run: docker context create multiarch_builder
       - run: docker context use multiarch_builder
       - run: docker buildx create --use multiarch_builder
