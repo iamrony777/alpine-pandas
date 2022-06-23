@@ -19,8 +19,10 @@ jobs:
       - run: docker context use multiarch_builder
       - run: docker buildx create --use multiarch_builder
       - run: docker buildx inspect --bootstrap
-      - run: ls .. && ls ../project
+      - run: ls ..
+      - run: ls ../project
+      - run: ls .
       # - run: git clone https://github.com/iamrony777/alpine-pandas.git
       # - run: cd alpine-pandas
       # - run: git checkout circleci-project-setup
-      - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest ~/project/Dockerfile
+      # - run: docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest ~/project/Dockerfile
