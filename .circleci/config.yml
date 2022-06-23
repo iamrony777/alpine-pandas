@@ -17,7 +17,8 @@ jobs:
 
       - run: |-
           docker context create multiarch_builder
-          docker buildx create --name multiarch_builder --use
+          docker buildx create multiarch_builder
+          docker buildx use multiarch_builder
           docker buildx inspect --bootstrap
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
           docker build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --tag iamrony777/alpine-pandas:latest .
