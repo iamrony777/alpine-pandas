@@ -1,0 +1,6 @@
+numpy==1.17.*
+python-dateutil==2.7.3
+pytz==2017.3
+numexpr>=2.7.0
+bottleneck>=1.2.1
+pandas==1.3.*
